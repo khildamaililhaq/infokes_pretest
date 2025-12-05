@@ -42,6 +42,7 @@ npm run start:frontend  # Frontend at http://localhost:5173
 ## 📚 Documentation
 
 - **[MONOREPO.md](./MONOREPO.md)** - Complete monorepo guide, structure, and workspace management
+- **[DOCKER.md](./DOCKER.md)** - Docker setup, compose configuration, and deployment guide
 - **[packages/backend/README.md](./packages/backend/README.md)** - Backend API documentation
 - **[packages/frontend/README.md](./packages/frontend/README.md)** - Frontend UI documentation
 
@@ -68,14 +69,55 @@ App: http://localhost:5173
 ## 🛠️ Common Commands
 
 ```bash
-# Development
+# Development (Local)
 npm run start              # Start all servers
 npm run start:backend      # Start backend only
 npm run start:frontend     # Start frontend only
 
+# Development (Docker)
+npm run docker:dev        # Start services in Docker
+npm run docker:dev:logs   # View Docker logs
+npm run docker:dev:stop   # Stop Docker services
+
+# Production (Docker)
+npm run docker:prod       # Start production services
+npm run docker:prod:logs  # View logs
+npm run docker:prod:stop  # Stop services
+
+# Docker Management
+npm run docker:build      # Build Docker images
+npm run docker:clean      # Clean up Docker resources
+
 # Testing
 npm run test              # Test all packages
 npm run test:watch        # Test with watch mode
+
+# Build
+npm run build             # Build all packages
+npm run clean             # Clean build artifacts
+```
+
+## 🐳 Docker Setup
+
+The project is fully dockerized with support for both development and production:
+
+```bash
+# Quick start with Docker Compose
+docker-compose -f docker-compose.dev.yml up -d
+
+# Access services:
+# - Frontend: http://localhost:5173
+# - Backend: http://localhost:3000
+# - Swagger: http://localhost:3000/swagger
+# - Database: localhost:5432
+```
+
+See **[DOCKER.md](./DOCKER.md)** for comprehensive Docker documentation including:
+- Development vs Production setups
+- Building and running individual containers
+- Environment configuration
+- Debugging and troubleshooting
+- Production deployment
 
 # Building
 npm run build             # Build all packages
