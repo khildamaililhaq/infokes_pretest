@@ -1,0 +1,22 @@
+{
+  "name": "infokes-pretest",
+  "version": "0.0.1",
+  "description": "File Manager Application",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "setup": "npm install",
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:watch": "npm run test:watch --workspaces",
+    "lint": "npm run lint --workspaces",
+    "start:backend": "npm run --workspace=backend dev",
+    "start:frontend": "npm run --workspace=frontend dev",
+    "start": "npm run start:backend & npm run start:frontend",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/.next packages/*/dist"
+  },
+  "devDependencies": {}
+}
