@@ -112,7 +112,11 @@ case "$1" in
     ;;
   test:frontend)
     print_header "Running Frontend Tests"
-    docker-compose -f docker-compose.dev.yml exec frontend npm run test
+    docker-compose -f docker-compose.dev.yml exec frontend bun test ./packages/frontend/tests/*Service.test.js
+    ;;
+  test:frontend:components)
+    print_header "Running Frontend Component Tests"
+    docker-compose -f docker-compose.dev.yml exec frontend sh -c "cd packages/frontend && bunx vitest run"
     ;;
   *)
     echo "Unknown command: $1"

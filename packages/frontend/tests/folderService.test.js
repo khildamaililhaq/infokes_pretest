@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach, mock } from 'bun:test';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { folderService } from '../src/services/folderService';
 
 const originalFetch = global.fetch;
-global.fetch = mock(() => {});
+global.fetch = vi.fn(() => {});
 
 describe('folderService', () => {
   beforeEach(() => {

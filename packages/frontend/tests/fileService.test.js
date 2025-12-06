@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach, mock } from 'bun:test';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { fileService } from '../src/services/fileService';
 
 const originalFetch = global.fetch;
-global.fetch = mock(() => {});
+global.fetch = vi.fn(() => {});
 
 describe('fileService', () => {
   beforeEach(() => {

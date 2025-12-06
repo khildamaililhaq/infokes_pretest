@@ -57,6 +57,7 @@ services:
     volumes:
       - ./packages/frontend/src:/app/packages/frontend/src
       - ./packages/frontend/public:/app/packages/frontend/public
+      - ./packages/frontend/tests:/app/packages/frontend/tests
       - ./packages/frontend/vite.config.js:/app/packages/frontend/vite.config.js
     environment:
       VITE_API_BASE_URL: http://localhost:3000
