@@ -18,4 +18,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://localhost:5173 || exit 1
 
 # Start frontend in dev mode with Vite
-CMD ["sh", "-c", "cd packages/frontend && bun run dev -- --host 0.0.0.0"]
+CMD ["sh", "-c", "cd packages/frontend && bun run dev"]
