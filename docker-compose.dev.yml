@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: infokes_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
     healthcheck:
@@ -30,10 +30,14 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: development
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/infokes_db
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: infokes_db
       PORT: 3000
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ./packages/backend/src:/app/packages/backend/src
       - ./packages/backend/tests:/app/packages/backend/tests
@@ -49,10 +53,11 @@ services:
     depends_on:
       - backend
     ports:
-      - "5173:5173"
+      - "5174:5173"
     volumes:
       - ./packages/frontend/src:/app/packages/frontend/src
       - ./packages/frontend/public:/app/packages/frontend/public
+      - ./packages/frontend/vite.config.js:/app/packages/frontend/vite.config.js
     environment:
       VITE_API_BASE_URL: http://localhost:3000
     networks:

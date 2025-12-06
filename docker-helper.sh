@@ -50,11 +50,15 @@ fi
 case "$1" in
   dev:start)
     print_header "Starting Development Environment"
+    # Clean up any lingering containers with metadata issues
+    docker-compose -f docker-compose.dev.yml down -v 2>/dev/null || true
     docker-compose -f docker-compose.dev.yml up -d
+    sleep 3
     print_success "Development environment started"
-    print_info "Frontend: http://localhost:5173"
-    print_info "Backend: http://localhost:3000"
-    print_info "Swagger: http://localhost:3000/swagger"
+    print_info "Frontend: http://localhost:5174"
+    print_info "Backend: http://localhost:3001"
+    print_info "Swagger: http://localhost:3001/docs"
+    print_info "PostgreSQL: localhost:5433"
     ;;
   dev:stop)
     print_header "Stopping Development Environment"

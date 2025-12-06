@@ -1,4 +1,6 @@
 import { DataSource } from 'typeorm';
+import { Folder } from '../entities/Folder';
+import { File } from '../entities/File';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +11,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_DATABASE || 'filemanager',
   synchronize: process.env.NODE_ENV === 'development', // Auto-sync in dev only
   logging: process.env.NODE_ENV === 'development',
-  entities: ['src/entities/**/*.ts'],
+  entities: [Folder, File],
   subscribers: [],
   migrations: [],
 });

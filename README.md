@@ -1,251 +1,215 @@
 # Infokes Pretest - File Manager Application
 
-A modern, full-stack file manager application with a backend API and intuitive frontend UI.
+A modern, full-stack file manager with Vue 3 frontend and Elysia backend, fully containerized with Docker.
 
-## 🏗️ Architecture
-
-This project uses a **monorepo structure** with npm workspaces, organized as follows:
-
-```
-infokes-pretest/
-├── packages/
-│   ├── backend/    # Bun + Elysia + TypeORM API
-│   └── frontend/   # Vue 3 + Vite UI
-├── MONOREPO.md     # Detailed monorepo documentation
-└── package.json    # Workspace configuration
-```
-
-## 🚀 Quick Start
+## 🚀 Quick Start with Docker (Recommended)
 
 ### Prerequisites
-- Node.js v20.19+ or v22.12+
-- Bun v1.3.3+
+- Docker & Docker Compose installed
+- No Node.js required (everything runs in containers)
 
-### Installation & Setup
+### Start Development Environment
 
 ```bash
-# Clone repository
+# Clone the repository
 git clone <repository-url>
 cd infokes-pretest
 
+# Start all services with Docker
+./docker-helper.sh dev:start
+```
+
+That's it! Services will be available at:
+- **Frontend:** http://localhost:5174
+- **Backend API:** http://localhost:3001
+- **API Docs:** http://localhost:3001/docs
+- **PostgreSQL:** localhost:5433 (user: postgres, pass: postgres)
+
+### Common Docker Commands
+
+```bash
+# Start development environment
+./docker-helper.sh dev:start
+
+# Stop services
+./docker-helper.sh dev:stop
+
+# View logs
+./docker-helper.sh dev:logs
+
+# Access backend shell
+./docker-helper.sh dev:shell
+
+# Access PostgreSQL
+./docker-helper.sh dev:db
+
+# Show container status
+./docker-helper.sh status
+
+# Stop and remove everything
+docker-compose -f docker-compose.dev.yml down -v
+```
+
+## 🛠️ Local Development (Without Docker)
+
+### Prerequisites
+- Node.js v22+ or Bun v1.3.3+
+- PostgreSQL 16+
+
+### Setup
+
+```bash
 # Install dependencies
 npm install
 
-# Start development servers
-npm run start
+# Start backend
+npm run start:backend
 
-# Or start individually:
-npm run start:backend   # Backend at http://localhost:3000
-npm run start:frontend  # Frontend at http://localhost:5173
+# In another terminal, start frontend
+npm run start:frontend
 ```
 
-## 📚 Documentation
+Services will be available at:
+- **Frontend:** http://localhost:5174
+- **Backend API:** http://localhost:3001
 
-- **[MONOREPO.md](./MONOREPO.md)** - Complete monorepo guide, structure, and workspace management
-- **[DOCKER.md](./DOCKER.md)** - Docker setup, compose configuration, and deployment guide
-- **[packages/backend/README.md](./packages/backend/README.md)** - Backend API documentation
-- **[packages/frontend/README.md](./packages/frontend/README.md)** - Frontend UI documentation
-
-## 📦 Packages
-
-### Backend (`@infokes/backend`)
-- **Framework:** Elysia
-- **Database:** PostgreSQL + TypeORM
-- **Runtime:** Bun 1.3.3
-- **Features:** REST API, CORS, Swagger docs
-- **Tests:** 28/28 passing
-
-API Docs: http://localhost:3000/docs
-
-### Frontend (`@infokes/frontend`)
-- **Framework:** Vue 3 (Composition API)
-- **Build:** Vite 7.2.4
-- **Runtime:** Bun 1.3.3
-- **UI Features:** Tree view sidebar, context menus, breadcrumbs
-- **Tests:** 11/11 passing
-
-App: http://localhost:5173
-
-## 🛠️ Common Commands
-
-```bash
-# Development (Local)
-npm run start              # Start all servers
-npm run start:backend      # Start backend only
-npm run start:frontend     # Start frontend only
-
-# Development (Docker)
-npm run docker:dev        # Start services in Docker
-npm run docker:dev:logs   # View Docker logs
-npm run docker:dev:stop   # Stop Docker services
-
-# Production (Docker)
-npm run docker:prod       # Start production services
-npm run docker:prod:logs  # View logs
-npm run docker:prod:stop  # Stop services
-
-# Docker Management
-npm run docker:build      # Build Docker images
-npm run docker:clean      # Clean up Docker resources
-
-# Testing
-npm run test              # Test all packages
-npm run test:watch        # Test with watch mode
-
-# Build
-npm run build             # Build all packages
-npm run clean             # Clean build artifacts
-```
-
-## 🐳 Docker Setup
-
-The project is fully dockerized with support for both development and production:
-
-```bash
-# Quick start with Docker Compose
-docker-compose -f docker-compose.dev.yml up -d
-
-# Access services:
-# - Frontend: http://localhost:5173
-# - Backend: http://localhost:3000
-# - Swagger: http://localhost:3000/swagger
-# - Database: localhost:5432
-```
-
-See **[DOCKER.md](./DOCKER.md)** for comprehensive Docker documentation including:
-- Development vs Production setups
-- Building and running individual containers
-- Environment configuration
-- Debugging and troubleshooting
-- Production deployment
-
-# Building
-npm run build             # Build all packages
-
-# Cleanup
-npm run clean             # Remove all artifacts
-```
-
-## 📋 Features
-
-### File Manager
-- ✅ Create, read, update, delete folders
-- ✅ Create, read, update, delete files
-- ✅ Hierarchical folder structure
-- ✅ Right-click context menus
-- ✅ Folder tree navigation
-- ✅ Breadcrumb navigation
-- ✅ Empty state handling
-
-### API
-- ✅ RESTful endpoints
-- ✅ CORS enabled
-- ✅ Swagger documentation
-- ✅ TypeScript support
-- ✅ Database migrations
-
-### Frontend
-- ✅ Vue 3 Composition API
-- ✅ Vue Router integration
-- ✅ Reusable components
-- ✅ Service layer architecture
-- ✅ Responsive design
-
-## 🗂️ Folder Structure
+## 📁 Project Structure
 
 ```
 infokes-pretest/
-├── package.json                      # Root workspace config
-├── .npmrc                            # NPM workspace settings
-├── MONOREPO.md                       # Monorepo documentation
-├── README.md                         # This file
 ├── packages/
-│   ├── backend/
-│   │   ├── src/
-│   │   │   ├── index.ts              # Server entry
-│   │   │   ├── controllers/          # Route handlers
-│   │   │   ├── services/             # Business logic
-│   │   │   ├── repositories/         # Data access
-│   │   │   └── entities/             # DB models
-│   │   ├── tests/                    # Test files
-│   │   └── package.json
-│   │
-│   └── frontend/
-│       ├── src/
-│       │   ├── main.js               # App entry
-│       │   ├── views/                # Pages
-│       │   ├── components/           # UI components
-│       │   ├── composables/          # Vue hooks
-│       │   ├── services/             # API clients
-│       │   └── router/               # Routing
-│       ├── tests/                    # Test files
-│       └── package.json
+│   ├── backend/        # Elysia + TypeORM API server
+│   └── frontend/       # Vue 3 + Vite UI application
+├── docker-compose.dev.yml  # Development stack
+├── Dockerfile          # Multi-stage production build
+└── docker-helper.sh    # Helper script for Docker commands
 ```
 
-## 🧪 Testing
+## ✨ Features
 
-```bash
-# Test all packages
-npm run test
+- ✅ Create, read, update, delete folders and files
+- ✅ Hierarchical folder structure with tree navigation
+- ✅ Context menus and breadcrumb navigation
+- ✅ RESTful API with Swagger documentation
+- ✅ PostgreSQL database with TypeORM
+- ✅ Vue 3 with Composition API
+- ✅ Fully containerized with Docker
+- ✅ Hot-reload in development mode
 
-# Test specific package
-npm run test --workspace=@infokes/backend
-npm run test --workspace=@infokes/frontend
+## 📚 Additional Documentation
 
-# Watch mode
-npm run test:watch
-```
+- [MONOREPO.md](./MONOREPO.md) - Monorepo structure and configuration
+- [DOCKER.md](./DOCKER.md) - Detailed Docker setup and deployment
+- [packages/backend/README.md](./packages/backend/README.md) - Backend API details
+- [packages/frontend/README.md](./packages/frontend/README.md) - Frontend UI details
+
+## 🐳 Docker Architecture
+
+### Development Stack (docker-compose.dev.yml)
+- **PostgreSQL 16:** Database (port 5433)
+- **Backend:** Elysia server with hot-reload (port 3001)
+- **Frontend:** Vite dev server with HMR (port 5174)
+
+All services run in a shared Docker network and persist data to volumes.
+
+### Production Build (Dockerfile)
+- Multi-stage build for optimized image size
+- Bun runtime for both backend and frontend
+- Static frontend bundle with production API endpoint
 
 ## 🔧 Configuration
 
-### Backend
-- Database: PostgreSQL (localhost:5432)
-- Server: http://localhost:3000
-- Swagger Docs: http://localhost:3000/docs
+### Environment Variables
 
-### Frontend
-- Build Tool: Vite
-- Dev Server: http://localhost:5173
-- Node: v20.19+ or v22.12+
+Create `.env` in the root directory:
 
-## 📝 Development Notes
+```env
+# Backend
+DB_HOST=postgres
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_DATABASE=infokes_db
+NODE_ENV=development
+PORT=3000
 
-- This is a monorepo using npm workspaces
-- Each package is independent but part of the same project
-- Backend and frontend can be deployed separately
-- Use workspace commands for package-specific operations
-
-## 🚨 Troubleshooting
-
-**Port already in use?**
-```bash
-# Kill backend (port 3000)
-lsof -ti:3000 | xargs kill -9
-
-# Kill frontend (port 5173)
-lsof -ti:5173 | xargs kill -9
+# Frontend
+VITE_API_BASE_URL=http://localhost:3001
 ```
 
-**Node version issues?**
+### Database
+
+- **Type:** PostgreSQL 16
+- **Dev Database:** infokes_db
+- **Dev Port:** 5433 (on host), 5432 (in Docker network)
+- **Auto-migration:** Enabled in development
+
+## 🚀 Deployment
+
+### Docker Compose (Production-like)
+
 ```bash
-nvm use 22  # Switch to Node 22
-npm install
+# Build images
+docker-compose build
+
+# Start services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop and clean up
+docker-compose down -v
 ```
 
-**Dependencies not installing?**
+## 📝 Common Tasks
+
+### Create a new folder via API
+
 ```bash
-npm run clean
-npm install
+curl -X POST http://localhost:3001/folders \
+  -H "Content-Type: application/json" \
+  -d '{"name":"My Folder","description":"Test folder"}'
 ```
+
+### View API Documentation
+
+Open http://localhost:3001/docs in your browser for interactive Swagger UI.
+
+### Access Database
+
+```bash
+./docker-helper.sh dev:db
+# Or manually:
+psql -h localhost -p 5433 -U postgres -d infokes_db
+```
+
+## 🐛 Troubleshooting
+
+### Containers won't start
+```bash
+# Clean up and restart
+docker-compose -f docker-compose.dev.yml down -v
+docker-compose -f docker-compose.dev.yml up -d
+```
+
+### Port already in use
+```bash
+# Kill process on port
+lsof -ti:5174 | xargs kill -9  # Frontend
+lsof -ti:3001 | xargs kill -9  # Backend
+lsof -ti:5433 | xargs kill -9  # Database
+```
+
+### Frontend can't reach backend
+- Ensure backend is healthy: `docker-compose -f docker-compose.dev.yml ps`
+- Check backend logs: `docker logs infokes-backend-dev`
+- Verify API URL is set to `http://localhost:3001`
 
 ## 📄 License
 
 MIT
 
-## 👤 Author
-
-Infokes Pretest Team
-
 ---
 
-**Need more details?** Check [MONOREPO.md](./MONOREPO.md) for comprehensive documentation.
+**Get started now:** `./docker-helper.sh dev:start` 🚀
