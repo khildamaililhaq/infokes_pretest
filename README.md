@@ -85,23 +85,6 @@ infokes-pretest/
 └── docker-helper.sh    # Helper script for Docker commands
 ```
 
-## ✨ Features
-
-- ✅ Create, read, update, delete folders and files
-- ✅ Hierarchical folder structure with tree navigation
-- ✅ Context menus and breadcrumb navigation
-- ✅ RESTful API with Swagger documentation
-- ✅ PostgreSQL database with TypeORM
-- ✅ Vue 3 with Composition API
-- ✅ Fully containerized with Docker
-- ✅ Hot-reload in development mode
-
-## 📚 Additional Documentation
-
-- [MONOREPO.md](./MONOREPO.md) - Monorepo structure and configuration
-- [DOCKER.md](./DOCKER.md) - Detailed Docker setup and deployment
-- [packages/backend/README.md](./packages/backend/README.md) - Backend API details
-- [packages/frontend/README.md](./packages/frontend/README.md) - Frontend UI details
 
 ## 🐳 Docker Architecture
 
@@ -207,8 +190,6 @@ lsof -ti:5433 | xargs kill -9  # Database
 - Verify API URL is set to `http://localhost:3001`
 
 ## 📄 License
-
-MIT
 
 ---
 
