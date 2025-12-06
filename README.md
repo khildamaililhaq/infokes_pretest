@@ -70,8 +70,8 @@ npm run start:frontend
 ```
 
 Services will be available at:
-- **Frontend:** http://localhost:5174
-- **Backend API:** http://localhost:3001
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:3000
 
 ## 📁 Project Structure
 
@@ -90,8 +90,8 @@ infokes-pretest/
 
 ### Development Stack (docker-compose.dev.yml)
 - **PostgreSQL 16:** Database (port 5433)
-- **Backend:** Elysia server with hot-reload (port 3001)
-- **Frontend:** Vite dev server with HMR (port 5174)
+- **Backend:** Elysia server with hot-reload (port 3000)
+- **Frontend:** Vite dev server with HMR (port 5173)
 
 All services run in a shared Docker network and persist data to volumes.
 
@@ -117,7 +117,7 @@ NODE_ENV=development
 PORT=3000
 
 # Frontend
-VITE_API_BASE_URL=http://localhost:3001
+VITE_API_BASE_URL=http://localhost:3000
 ```
 
 ### Database
@@ -150,14 +150,14 @@ docker-compose down -v
 ### Create a new folder via API
 
 ```bash
-curl -X POST http://localhost:3001/folders \
+curl -X POST http://localhost:3000/folders \
   -H "Content-Type: application/json" \
   -d '{"name":"My Folder","description":"Test folder"}'
 ```
 
 ### View API Documentation
 
-Open http://localhost:3001/docs in your browser for interactive Swagger UI.
+Open http://localhost:3000/docs in your browser for interactive Swagger UI.
 
 ### Access Database
 
@@ -179,15 +179,15 @@ docker-compose -f docker-compose.dev.yml up -d
 ### Port already in use
 ```bash
 # Kill process on port
-lsof -ti:5174 | xargs kill -9  # Frontend
-lsof -ti:3001 | xargs kill -9  # Backend
+lsof -ti:5173 | xargs kill -9  # Frontend
+lsof -ti:3000 | xargs kill -9  # Backend
 lsof -ti:5433 | xargs kill -9  # Database
 ```
 
 ### Frontend can't reach backend
 - Ensure backend is healthy: `docker-compose -f docker-compose.dev.yml ps`
 - Check backend logs: `docker logs infokes-backend-dev`
-- Verify API URL is set to `http://localhost:3001`
+- Verify API URL is set to `http://localhost:3000`
 
 ## 📄 License
 
