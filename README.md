@@ -20,9 +20,9 @@ cd infokes-pretest
 ```
 
 That's it! Services will be available at:
-- **Frontend:** http://localhost:5174
-- **Backend API:** http://localhost:3001
-- **API Docs:** http://localhost:3001/docs
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:3000
+- **API Docs:** http://localhost:3000/docs
 - **PostgreSQL:** localhost:5433 (user: postgres, pass: postgres)
 
 ### Common Docker Commands

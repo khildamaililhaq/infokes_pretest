@@ -55,9 +55,9 @@ case "$1" in
     docker-compose -f docker-compose.dev.yml up -d
     sleep 3
     print_success "Development environment started"
-    print_info "Frontend: http://localhost:5174"
-    print_info "Backend: http://localhost:3001"
-    print_info "Swagger: http://localhost:3001/docs"
+    print_info "Frontend: http://localhost:5173"
+    print_info "Backend: http://localhost:3000"
+    print_info "Swagger: http://localhost:3000/docs"
     print_info "PostgreSQL: localhost:5433"
     ;;
   dev:stop)
